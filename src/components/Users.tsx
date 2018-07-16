@@ -34,7 +34,7 @@ const Users = ({ users, loadUser, loading, current }: IUsersProps) => {
 };
 
 function mapState(state: IState) {
-  return state;
+  return state.users;
 }
 
 function mapDispatch(dispatch: Dispatch<string>) {

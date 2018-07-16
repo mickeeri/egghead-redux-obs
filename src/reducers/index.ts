@@ -1,20 +1,39 @@
+import { combineReducers } from 'redux';
 import { IAction } from '../actions';
 import { FETCH_USER, FETCH_USER_FULFILLED } from '../constans';
 import IUser from '../models/IUser';
 
-export interface IState {
+export interface IUsersState {
   current: IUser | null;
   users: string[];
   loading: boolean;
 }
 
-const initialState: IState = {
+export interface IStoriesState {
+  stories: any[];
+  loading: boolean;
+}
+
+export interface IState {
+  stories: IStoriesState;
+  users: IUsersState;
+}
+
+const initialUserState: IUsersState = {
   current: null,
   loading: false,
   users: ['shakyshane', 'sindresorhus', 'substack', 'mickeeri'],
 };
 
-const userReducer = (state: IState = initialState, action: IAction) => {
+const initialStoriesState: IStoriesState = {
+  loading: false,
+  stories: [],
+};
+
+const userReducer = (
+  state: IUsersState = initialUserState,
+  action: IAction,
+) => {
   switch (action.type) {
     case FETCH_USER:
       return {
@@ -33,4 +52,16 @@ const userReducer = (state: IState = initialState, action: IAction) => {
   }
 };
 
-export default userReducer;
+const storiesReducer = (
+  state: IStoriesState = initialStoriesState,
+  action: IAction,
+) => {
+  return state;
+};
+
+const reducers = combineReducers({
+  stories: storiesReducer,
+  users: userReducer,
+});
+
+export default reducers;

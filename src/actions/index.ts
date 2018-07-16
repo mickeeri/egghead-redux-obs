@@ -1,5 +1,9 @@
 import { createAction } from 'typesafe-actions';
-import { FETCH_USER, FETCH_USER_FULFILLED } from '../constans';
+import {
+  FETCH_STORIES_FULFILLED,
+  FETCH_USER,
+  FETCH_USER_FULFILLED,
+} from '../constans';
 
 export interface IAction {
   type: string;
@@ -7,10 +11,13 @@ export interface IAction {
   params?: {};
 }
 
-export const clear = createAction('hello', (params = {}) => ({
-  params,
-  type: 'hello',
-}));
+export const fetchStoriesFulfilledAction = createAction(
+  FETCH_STORIES_FULFILLED,
+  stories => ({
+    payload: stories,
+    type: FETCH_STORIES_FULFILLED,
+  }),
+);
 
 export const fetchUserAction = createAction(FETCH_USER, login => ({
   payload: login,
